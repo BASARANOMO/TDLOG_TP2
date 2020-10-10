@@ -71,8 +71,7 @@ class Solitaire:
         idx_to_delete = [int(i)-1 for i in idx_str]
         if self.check_points(map(self._hand.__getitem__, idx_to_delete)):
             print("Valid input. Dominoes chosen pulled out!")
-            self._hand = [self._hand[i] for i in range(self.check_nbr_hand()) \
-            if i not in idx_to_delete]
+            self._hand = [self._hand[i] for i in range(self.check_nbr_hand()) if i not in idx_to_delete]
         else:
             print("Invalid input. Please retry!")
 
@@ -81,7 +80,7 @@ class Solitaire:
         # check whether sum of dots is equal to 12
         total_points = 0
         for domino in dominoes:
-            total_points += domino._point
+            total_points += domino.read_point()
         if total_points == 12:
             return True
         else:
@@ -100,7 +99,6 @@ class Solitaire:
 
             idx += 1
 
-
     def is_game_won(self):
         # check whether the player won
         if (self.check_nbr_deck() == 0) and (self.check_nbr_hand() == 0):
@@ -110,14 +108,14 @@ class Solitaire:
 
     def is_game_lost(self):
         # 2 sum, 3 sum, 4 sum (3 sum), 5 sum (2 sum), 6 sum (check 1 domino)
-        points_list = [domino._point for domino in self._hand]
+        points_list = [domino.read_point() for domino in self._hand]
         total_points = sum(points_list)
 
         # first of all, check if the domino of 12 points is in hand
         # and then check the sum of every 6 dominoes
         for point in points_list:
             if point == 12:
-                return False # the game can continue
+                return False  # the game can continue
             if (total_points - point) == 12:
                 return False
 
@@ -131,15 +129,15 @@ class Solitaire:
         if three_sum(points_list, 12) or three_sum(points_list, total_points-12):
             return False
 
-        return True # the game can not continue
+        return True  # the game can not continue
 
     def turn(self):
         # draw dominoes from the top of the deck
         print("Draw dominoes from the deck to hand.")
         self.draw_domino()
 
-        print(f"number of dominoes in deck: {self.check_nbr_deck()}; " \
-            + f"number of dominoes in hand: {self.check_nbr_hand()}.")
+        print(f"number of dominoes in deck: {self.check_nbr_deck()}; " +
+              f"number of dominoes in hand: {self.check_nbr_hand()}.")
 
         # show dominoes in hand
         print("Show all dominoes in hand: ")
@@ -204,6 +202,7 @@ class Solitaire:
             print("Next turn.\n")
             turn_nbr += 1
         return
+
 
 """
 a = Solitaire()
