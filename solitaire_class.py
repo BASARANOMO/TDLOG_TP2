@@ -10,13 +10,14 @@ import random
 from domino_class import Domino
 from multi_sum import two_sum, three_sum
 
+
 class Solitaire:
     def __init__(self):
         self._deck = [Domino(j, i) for i in range(7) for j in range(i+1)]
         self._hand = []
 
-    def shuffle_with_random_seed(self):
-        random.seed(2)
+    def shuffle_with_random_seed(self, random_seed):
+        random.seed(random_seed)
         random.shuffle(self._deck)
 
     def shuffle(self):
@@ -67,11 +68,7 @@ class Solitaire:
         -------
 
         """
-        try:
-            idx_to_delete = [int(i)-1 for i in idx_str]
-        except ValueError:
-            idx_str_new = input("Input is not a string! Please retry: ")
-            idx_to_delete = [int(i)-1 for i in idx_str_new]
+        idx_to_delete = [int(i)-1 for i in idx_str]
         if self.check_points(map(self._hand.__getitem__, idx_to_delete)):
             print("Valid input. Dominoes chosen pulled out!")
             self._hand = [self._hand[i] for i in range(self.check_nbr_hand()) \
@@ -179,8 +176,17 @@ class Solitaire:
         print("Check passed. Continue the game.")
 
         # shuffling
-        print("Shuffle the deck.")
-        self.shuffle()
+        shuffle_method = int(\
+        input("Shuffle the deck. Please choose the method to use (1 for random shuffling, 2 for shuffling with seed): "))
+        if shuffle_method == 1:
+            self.shuffle()
+            print("Shuffling done.")
+        elif shuffle_method == 2:
+            random_seed = input("Please enter an integer for the random seed: ")
+            self.shuffle_with_random_seed(random_seed)
+            print("Shuffling done.")
+        else:
+            print("No valid input. Please enter an integer (1 or 2)!")
 
         # play
         print("Begin playing.")
