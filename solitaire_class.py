@@ -177,7 +177,7 @@ class Solitaire:
 
         # shuffling
         shuffle_method = int(\
-        input("Shuffle the deck. Please choose the method to use (1 for random shuffling, 2 for shuffling with seed): "))
+            input("Shuffle the deck. Please choose the method to use (1 for random shuffling, 2 for shuffling with seed): "))
         if shuffle_method == 1:
             self.shuffle()
             print("Shuffling done.")

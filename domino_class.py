@@ -37,17 +37,26 @@ class Domino:
         domino_str += "+-----|-----+"
         return domino_str
 
+    def read_left(self):
+        return self._left
+
+    def read_right(self):
+        return self._right
+
+    def read_point(self):
+        return self._point
+
     def __eq__(self, other):
-        if self._point == other._point:
-            if self._left == other._left or self._left == other._right:
+        if self._point == other.read_point():
+            if self._left == other.read_left() or self._left == other.read_right():
                 return True
         return False
 
     def __ne__(self, other):
-        if self._point != other._point:
+        if self._point != other.read_point():
             return True
         else:
-            if self._left != other._left and self._left != other._right:
+            if self._left != other.read_left() and self._left != other.read_right():
                 return True
         return False
 
