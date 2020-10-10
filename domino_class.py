@@ -6,6 +6,7 @@
 @Time: 10/05/2020 13:45-15:00
 """
 
+
 class Domino:
     def __init__(self, nbr_left, nbr_right):
         self._left, self._right = nbr_left, nbr_right

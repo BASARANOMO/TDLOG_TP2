@@ -5,6 +5,7 @@
 @Author2: XIE Ruiling
 """
 
+
 import random
 from domino_class import Domino
 from multi_sum import two_sum, three_sum
